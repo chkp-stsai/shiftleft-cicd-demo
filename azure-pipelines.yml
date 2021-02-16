@@ -21,7 +21,18 @@ steps:
    script: 
      echo $(CHKP_CLOUDGUARD_ID)
   displayName: Showing ID
-   
+- task: CmdLine@2
+  env: 
+    #Need to map secret variable to environment variables
+    CHKP_CLOUDGUARD_ID: $(CHKP_CLOUDGUARD_ID)
+    CHKP_CLOUDGUARD_SECRET: $(CHKP_CLOUDGUARD_SECRET)
+  inputs:
+    script: | 
+      docker pull vulnerable/web-dvwa
+      docker save -o web-dvwa.tar vulnerable/web/dvwa
+      ./shiftleft image-scan -i ./web-dvwa.tar
+
+container:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
