@@ -20,7 +20,7 @@ steps:
   inputs:
    script: 
      echo $(CHKP_CLOUDGUARD_ID)
-   displayName: Showing ID
+  displayName: Showing ID
    
 - script: |
     echo Add other tasks to build, test, and deploy your project.
